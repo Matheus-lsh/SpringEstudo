@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>AdicionaContato</h1>
+	<form th:action="@{/adicionacontato}" method="post">
+		<label>Nome:</label><input type="text" name="nome">
+		<label>Email:</label><input type="text" name="email">
+		<label>Endereço:</label><input type="text" name="endereco">
+		<label>Data de nascimento:</label><input type="text" name="dataNascimento">
+		<input type="submit" value="Gravar">
+	</form>
+</body>
+</html>

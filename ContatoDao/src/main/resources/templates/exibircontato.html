@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table border="1">
+	    <tr>
+	    	<th>Id</th>
+	        <th>Nome</th>
+	        <th>Email</th>
+	        <th>Endereco</th>
+	        <th>Data de Nascimento</th>
+	    </tr>
+	
+	    <tr th:each="contato : ${contatos}">
+	    	<td th:text="${contato.id}"></td>
+	        <td th:text="${contato.nome}"></td>
+	        <td th:text="${contato.email}"></td>
+	        <td th:text="${contato.endereco}"></td>
+	        <td th:text="${#dates.format(contato.dataNascimento, 'dd/MM/yyyy')}"></td>
+	    </tr>
+	</table>
+	<a th:href="@{/index}">Index</a>
+</body>
+</html>

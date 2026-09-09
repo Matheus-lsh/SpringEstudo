@@ -1,0 +1,89 @@
+package ms.group.contato;
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import ms.group.contato.dao.modelo.Contato;
+import ms.group.contato.dao.servlet.ServiceContatoServlet;
+
+@Controller
+public class HomeController {
+	private final ServiceContatoServlet serviceContatoServlet;
+
+    public HomeController(ServiceContatoServlet serviceContatoServlet) {
+    	this.serviceContatoServlet = serviceContatoServlet;
+    }
+	
+	@PostMapping("/adicionacontato")
+	public String adicionacontato(@RequestParam String nome,@RequestParam String email,@RequestParam String endereco,@RequestParam String dataNascimento){
+		if(serviceContatoServlet.adicionaContatoServlet(nome, endereco, email, dataNascimento)) {
+			return redirecionaIndex();
+		}
+		return "error";
+	}
+	
+	@PostMapping("/removeContato")
+	public String removecontato(@RequestParam String id) {
+		if(serviceContatoServlet.removeContatoServlet(id)){
+			return redirecionaIndex();
+		}
+		return "error";
+	}
+	
+	@PostMapping("/pesquisacontato")
+	public String pesquisaContao(@RequestParam String nome,Model model) {
+		if(nome.equalsIgnoreCase("todos")) {
+	        List<Contato> contatos = serviceContatoServlet.listarContatoServlet();
+
+	        model.addAttribute("contatos", contatos);
+		}else {
+	        List<Contato> contatos = serviceContatoServlet.pesquisaContato(nome);
+
+	        model.addAttribute("contatos", contatos);
+		}
+		return exibircontato();
+	}
+	
+    @GetMapping("/")
+    public String inicio() {
+        return "index";
+    }
+    
+    private String redirecionaIndex() {
+    	return "redirect:/index";
+    }
+    
+    @GetMapping("/index")
+    public String index() {
+        return "index";
+    }
+	
+	@GetMapping("/adicionacontato")
+	public String adicionacontato() {
+		return "adicionacontato";
+	}
+	
+	@GetMapping("/removecontato")
+	public String removecontato() {
+		return "removecontato";
+	}
+	
+	@GetMapping("/error")
+	public String erro() {
+		return "error";
+	}
+	
+	@GetMapping("/exibircontato")
+	public String exibircontato() {
+		return "exibircontato";
+	}
+	
+	@GetMapping("/consultacontato")
+	public String consultacontato() {
+		return "consultacontato";
+	}
+}
