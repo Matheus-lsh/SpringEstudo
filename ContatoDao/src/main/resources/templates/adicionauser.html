@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Adiciona Usuario</h1>
+	<form th:action="@{/adicionauser}" method="post">
+		<label>Nome:</label><input type="text" name="nome">
+		<select name="user">
+	        <option value="admin">Administrador</option>
+	        <option value="comum">Usuário</option>
+	    </select>
+		<label>senha:</label><input type="password" name="senha">
+		<input type="submit" value="Gravar">
+	</form>
+</body>
+</html>
